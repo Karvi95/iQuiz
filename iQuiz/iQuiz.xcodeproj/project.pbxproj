@@ -12,6 +12,7 @@
 		9DD1E6401CD3E9D300013F1C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9DD1E63E1CD3E9D300013F1C /* Main.storyboard */; };
 		9DD1E6421CD3E9D300013F1C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9DD1E6411CD3E9D300013F1C /* Assets.xcassets */; };
 		9DD1E6451CD3E9D300013F1C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9DD1E6431CD3E9D300013F1C /* LaunchScreen.storyboard */; };
+		9DD1E64D1CD3FEE100013F1C /* QuizComponentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD1E64C1CD3FEE100013F1C /* QuizComponentCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		9DD1E6411CD3E9D300013F1C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9DD1E6441CD3E9D300013F1C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9DD1E6461CD3E9D300013F1C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9DD1E64C1CD3FEE100013F1C /* QuizComponentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizComponentCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +59,7 @@
 				9DD1E63A1CD3E9D300013F1C /* AppDelegate.swift */,
 				9DD1E63C1CD3E9D300013F1C /* ViewController.swift */,
 				9DD1E63E1CD3E9D300013F1C /* Main.storyboard */,
+				9DD1E64C1CD3FEE100013F1C /* QuizComponentCell.swift */,
 				9DD1E6411CD3E9D300013F1C /* Assets.xcassets */,
 				9DD1E6431CD3E9D300013F1C /* LaunchScreen.storyboard */,
 				9DD1E6461CD3E9D300013F1C /* Info.plist */,
@@ -136,6 +139,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9DD1E63D1CD3E9D300013F1C /* ViewController.swift in Sources */,
+				9DD1E64D1CD3FEE100013F1C /* QuizComponentCell.swift in Sources */,
 				9DD1E63B1CD3E9D300013F1C /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
