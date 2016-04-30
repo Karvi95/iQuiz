@@ -8,11 +8,23 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate {
 
+    func dismissAlert(alert: UIAlertAction!) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    @IBAction func showAlert(sender: AnyObject) {
+        let alertController : UIAlertController = UIAlertController(title: "Alert!", message: "Settings go here.", preferredStyle: .Alert)
+        let okAction : UIAlertAction = UIAlertAction(title: "Okay", style: .Default, handler: dismissAlert)
+
+        alertController.addAction(okAction)
+        
+        self.presentViewController(alertController, animated: true, completion: nil)
+    }
 
     @IBOutlet weak var QuizTable: UITableView!
-    var names = ["Mathematics", "Marvel Super Heros", "Science"]
+    var names = ["Mathematics", "Marvel Super Heroes", "Science"]
     var descrs = ["1","2","3"]
     var images = [UIImage(named: "1"), UIImage(named: "2"), UIImage(named: "3")]
     
