@@ -25,7 +25,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     @IBOutlet weak var QuizTable: UITableView!
     var names = ["Mathematics", "Marvel Super Heroes", "Science"]
-    var descrs = ["1","2","3"]
+    var descrs = ["Once Euler looked out \nat seven bridges to cross. \n'Can’t be done,' he said.", "What can go wrong now? \nGuns, gods, monsters, heroes too! \nNot-death, shwarma break.", "Contract or expand? \nNot the universe's size \nBut the human mind."]
+    var authors = ["- Tao Wang", "- Anonymous" ,"- Cassandra Teas"]
     var images = [UIImage(named: "1"), UIImage(named: "2"), UIImage(named: "3")]
     
     override func viewDidLoad() {
@@ -48,6 +49,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         cell.topicPhoto.image = images[indexPath.row]
         cell.topicName.text = names[indexPath.row]
         cell.topicDescr.text = descrs[indexPath.row]
+        cell.topicAuthor.text = authors[indexPath.row]
         
         return cell
     }
