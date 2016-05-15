@@ -8,37 +8,80 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate {
+struct URLToGo {
+    static var targetURL = "http://tednewardsandbox.site44.com/questions.json"
+}
 
-    func dismissAlert(alert: UIAlertAction!) {
-        self.dismissViewControllerAnimated(true, completion: nil)
-    }
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate, UITextFieldDelegate {
     
-    @IBAction func showAlert(sender: AnyObject) {
-        let alertController : UIAlertController = UIAlertController(title: "Alert!", message: "Settings go here.", preferredStyle: .Alert)
-        let okAction : UIAlertAction = UIAlertAction(title: "Okay", style: .Default, handler: dismissAlert)
-
-        alertController.addAction(okAction)
-        
-        self.presentViewController(alertController, animated: true, completion: nil)
-    }
-
+    let theData = Data()
+    
     @IBOutlet weak var QuizTable: UITableView!
-    var names = ["Mathematics", "Marvel Super Heroes", "Science"]
-    var descrs = ["Once Euler looked out \nat seven bridges to cross. \n'Can’t be done,' he said.", "What can go wrong now? \nGuns, gods, monsters, heroes too! \nNot-death, shwarma break.", "Contract or expand? \nNot the universe's size \nBut the human mind."]
-    var images = [UIImage(named: "1"), UIImage(named: "2"), UIImage(named: "3")]
-    var authors = ["- Tao Wang", "- Anonymous" ,"- Cassandra Teas"]
+    
+    var names : [String] = []
+    var descrs : [String] = []
+    var images = [UIImage(named: "3"), UIImage(named: "2"), UIImage(named: "1")]
+    var topicsInQuiz : [Topic] = [Topic]()
+    var topicToSend : Int = 0
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        
+        QuizTable.dataSource = self
+        QuizTable.delegate = self
+        self.theData.HTTPRequest {
+            
+            self.names = self.theData.names
+            self.descrs = self.theData.descrs
+            
+            self.topicsInQuiz = self.theData.topicsInQuiz
+            
+            self.QuizTable.reloadData()
+        }
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
+//    func dismissAlert(alert: UIAlertAction!) {
+//        self.dismissViewControllerAnimated(true, completion: nil)
+//    }
+//    
+    @IBAction func showAlert(sender: AnyObject) {
+        let alertController : UIAlertController = UIAlertController(title: "Alert!", message: "Settings go here.", preferredStyle: .Alert)
+        let okAction : UIAlertAction = UIAlertAction(title: "Okay", style: .Default, handler: nil )
+        
+        alertController.addAction(okAction)
+        
+        alertController.addTextFieldWithConfigurationHandler { (textField: UITextField!) -> Void in
+            textField.placeholder = "Enter URL to retrieve information."
+        }
+
+        let retrieveAction : UIAlertAction = UIAlertAction(title: "Check Now", style: .Cancel, handler: {[weak self]
+            (paramAction:UIAlertAction!) in
+            if let textFields = alertController.textFields {
+                let theTextFields = textFields as [UITextField]
+                let enteredText = theTextFields[0].text
+                if enteredText != nil {
+                    URLToGo.targetURL = enteredText!
+                } else {
+                    URLToGo.targetURL = "http://tednewardsandbox.site44.com/questions.json"
+                }
+                self!.QuizTable.reloadData()
+            }
+        })
+        
+        alertController.addAction(retrieveAction)
+        
+        self.presentViewController(alertController, animated: true, completion: nil)
+    }
+
+
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return names.count
     }
@@ -48,10 +91,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         cell.topicPhoto.image = images[indexPath.row]
         cell.topicName.text = names[indexPath.row]
-        cell.topicDescr.text = descrs[indexPath.row]
-        cell.topicAuthor.text = authors[indexPath.row]
-        
+        cell.topicDescr.text = descrs[indexPath.row]      
         return cell
     }
-}
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let qVC = self.storyboard?.instantiateViewControllerWithIdentifier("QuizQuestion") as! QuizQuestionViewController
+        qVC.currentTopic = topicsInQuiz[indexPath.row]
 
+        self.presentViewController(qVC, animated: false, completion: nil)
+    }
+}
